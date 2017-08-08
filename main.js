@@ -8,11 +8,44 @@
 
 // if results[i].thumbnail === "" then {background img of box = }
 
-let box = `
-<div class="box">
-    <p>Title of Recipe</p>
-</div>
-`
 
-document.querySelector(".row").innerHTML = box;
+
+let recipeSearch = document.querySelector("input");
+
+// document.querySelector('i').addEventListener("click", function (e) {
+//     // if (e.keycode === 13) {
+//     alert("Your search results await");
+//     // }
+// });
+
+
+recipeSearch.addEventListener("keydown", function (event) {
+    let url;
+    if (event.keyCode === 13) {
+        url = "http://recipepuppyproxy.herokuapp.com/api/?q=" + recipeSearch.value;
+    }
+    axios.get(url)
+        .then(function (response) {
+            // console.log(response);
+
+            let data;
+            for (let i = 0; i < response.data.results.length; i++) {
+
+                data = response.data.results[i];
+
+                if (data.thumbnail === "") {
+                    data.thumbnail = "./recipe_default.jpeg";
+                }
+
+                let box = `
+        <a href="${data.href}">
+        <div class="box" style="background-image: url(${data.thumbnail}); height:100;width:100;">
+        <p>${data.title}</p>
+        </div>
+        </a>
+        `
+                document.querySelector(".row").innerHTML += box;
+            }
+        });
+});
 
