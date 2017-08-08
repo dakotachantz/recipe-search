@@ -37,9 +37,6 @@ recipeSearch.addEventListener("keydown", function (event) {
                 if (data.thumbnail === "") {
                     data.thumbnail = "./recipe_default.jpeg";
                 }
-                if (recipeSearch.value === "avocado") {
-                    // document.querySelectorAll().style.backgroundImage = "url('./recipe_default.jpeg')";
-                }
 
                 let box = `
         <a href="${data.href}">
@@ -48,6 +45,20 @@ recipeSearch.addEventListener("keydown", function (event) {
         </div>
         </a>
         `
+                if (recipeSearch.value === "avocado") {
+                    document.body.style.backgroundImage = "url('./avocado.gif')";
+                    // document.body.style.backgroundSize = "cover";
+                } else if (recipeSearch.value === "chicken") {
+                    document.body.style.backgroundImage = "url('./chicken.gif')";
+                    // document.body.style.backgroundSize = "";
+                } else if (recipeSearch.value === "beef") {
+                    document.body.style.backgroundImage = "url('./cow.gif')";
+                    // document.body.style.backgroundSize = "cover";
+                } else {
+                    document.body.style.backgroundImage = "";
+                }
+
+
                 document.querySelector(".row").innerHTML += box;
             }
         });
