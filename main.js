@@ -21,6 +21,7 @@ let recipeSearch = document.querySelector("input");
 
 recipeSearch.addEventListener("keydown", function (event) {
     let url;
+    document.querySelector(".row").innerHTML = '';
     if (event.keyCode === 13) {
         url = "http://recipepuppyproxy.herokuapp.com/api/?q=" + recipeSearch.value;
     }
@@ -35,6 +36,9 @@ recipeSearch.addEventListener("keydown", function (event) {
 
                 if (data.thumbnail === "") {
                     data.thumbnail = "./recipe_default.jpeg";
+                }
+                if (recipeSearch.value === "avocado") {
+                    // document.querySelectorAll().style.backgroundImage = "url('./recipe_default.jpeg')";
                 }
 
                 let box = `
